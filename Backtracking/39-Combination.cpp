@@ -1,31 +1,51 @@
 #include <vector>
+#include <iostream>
+#include <set>
 using namespace std;
 
-class Solution {
+class Solution
+{
 public:
-    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
-        vector<vector<int>> result;
-        vector<int> current;
-        backtrack(candidates, target, 0, current, result);
-        return result;
+    set<vector<int>> s;
+    void solve(vector<int> &candidates, int target, int index, vector<vector<int>> &ans, vector<int> &arr)
+    {
+
+        if (target < 0 || index == candidates.size())
+        {
+            return;
+        }
+
+        if (target == 0)
+        {
+            if (s.find(arr) == s.end())
+            {
+                ans.push_back({arr});
+                s.insert(arr);
+            }
+        }
+
+        arr.push_back(candidates[index]);
+
+        solve(candidates, target - candidates[index], index + 1, ans, arr);
+        solve(candidates, target - candidates[index], index, ans, arr);
+        arr.pop_back();
+        solve(candidates, target, index + 1, ans, arr);
     }
 
-private:
-    void backtrack(vector<int>& candidates, int target, int start, 
-                   vector<int>& current, vector<vector<int>>& result) {
-        if (target == 0) {
-            result.push_back(current);
-            return;
-        }
-        
-        if (target < 0) {
-            return;
-        }
-        
-        for (int i = start; i < candidates.size(); i++) {
-            current.push_back(candidates[i]);
-            backtrack(candidates, target - candidates[i], i, current, result);
-            current.pop_back();
-        }
+    vector<vector<int>> combinationSum(vector<int> &candidates, int target)
+    {
+        vector<vector<int>> ans;
+        vector<int> arr;
+        solve(candidates, target, 0, ans, arr);
+        return ans;
     }
 };
+
+int main()
+{
+    vector<int> candidates = {2, 3, 5};
+
+    int target = 6;
+    Solution s1;
+    s1.combinationSum(candidates, target);
+}
