@@ -1,5 +1,6 @@
 #include<iostream>
 #include<vector>
+#include<string>
 using namespace std;
 
 class Solution {
@@ -56,3 +57,23 @@ public:
         return ans;
     }
 };
+
+
+int main(){
+     Solution s;
+    int n = 4;
+
+    vector<vector<string>> solutions = s.solveNQueens(n);
+
+    int count = 1;
+    for(auto &board : solutions){
+        cout << "Solution " << count++ << ":\n";
+        for(auto &row : board){
+            cout << row << endl;
+        }
+        cout << endl;
+    }
+
+    cout << "Total solutions = " << solutions.size() << endl;
+    return 0;
+}
