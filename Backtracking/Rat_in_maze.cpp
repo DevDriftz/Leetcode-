@@ -6,8 +6,7 @@ using namespace std;
 class Solution {
 public:
   
-    void solve(vector<vector<int>> &maze, int row, int col,
-               string path, vector<string> &ans) {
+    void solve(vector<vector<int>> &maze, int row, int col, string path, vector<string> &ans) {
 
         int n = maze.size();
 
