@@ -12,20 +12,17 @@ public:
       cout << endl;
     }
   }
-
+  
   bool issafe(vector<vector<char>>& board, int row, int col, int n) {
 
-    // check left side of row
     for(int i = 0; i < col; i++)
         if(board[row][i] == 'Q')
             return false;
 
-    // check upper-left diagonal
     for(int i=row, j=col; i>=0 && j>=0; i--, j--)
         if(board[i][j] == 'Q')
             return false;
 
-    // check lower-left diagonal
     for(int i=row, j=col; i<n && j>=0; i++, j--)
         if(board[i][j] == 'Q')
             return false;
@@ -37,7 +34,7 @@ public:
     int n = board.size();
 
     if(col == n){
-      ans++;          // found one valid solution
+      ans++;          
       return; 
     }
 
@@ -62,6 +59,6 @@ public:
 
 int main() {
   Solution s1; 
-  cout << "total soultions possible : " << s1.totalNQueens(4)<<endl; // 2 
+  cout << "total soultions possible : " << s1.totalNQueens(8)<<endl;  
   return 0;
 }
